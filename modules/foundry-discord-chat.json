@@ -1,0 +1,11 @@
+{
+  "name": "foundry-discord-chat",
+  "title": "Foundry Discord Chat",
+  "description": "Sends chat messages from Foundry VTT to Discord.",
+  "author": "Your Name",
+  "version": "0.1.0",
+  "minimumCoreVersion": "0.8.0",
+  "compatibleCoreVersion": "1.0.0",
+  "scripts": ["scripts/main.js"],
+  "socket": true
+}
