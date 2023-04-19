@@ -1,8 +1,13 @@
-Hooks.on("init", () => {
+let config;
+
+Hooks.on("init", async () => {
+  config = await game.packs.get("foundry-discord-chat.config").getContent();
+  const serverIp = config[0].data.server_ip;
+
   game.socket.on("module.foundry-discord-chat", async (data) => {
     if (game.user.isGM) {
       try {
-        await fetch('http://your_server_ip:3000/foundry-message', {
+        await fetch(`${serverIp}/foundry-message`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
