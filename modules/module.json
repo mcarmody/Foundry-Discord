@@ -12,7 +12,8 @@
     }
   ],
   "compatibility": {
-    "verified": "10.0.0"
+    "minimum": "9",
+    "verified": "10"
   },
   "license": "./LICENSE",
   "url": "https://github.com/mcarmody/Foundry-Discord",
