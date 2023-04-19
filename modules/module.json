@@ -12,7 +12,7 @@
     }
   ],
   "compatibility": {
-    "minimum": 9,
-    "verified": 10
+    "minimum": "9",
+    "verified": "10"
   }
 }
