@@ -2,7 +2,7 @@
   "id": "foundry-discord-chat",
   "title": "Foundry Discord Chat",
   "description": "Sends chat messages from Foundry VTT to Discord.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "authors": [
     {
       "name": "DarkArbiter",
