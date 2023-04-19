@@ -11,6 +11,7 @@ Hooks.on("init", async () => {
   });
 
   const serverIp = game.settings.get("foundry-discord-chat", "serverIp");
+  console.log(serverIp);
   if (serverIp) {
     websocket = new WebSocket(`${serverIp.replace('http', 'ws')}`);
 
@@ -19,14 +20,12 @@ Hooks.on("init", async () => {
     };
 
     game.socket.on("module.foundry-discord-chat", async (data) => {
-      if (game.user.isGM) {
-        try {
-          websocket.send(JSON.stringify({ message: data.message }));
-        } catch (error) {
-          console.error('Error sending message to Discord bot:', error);
-        }
+      try {
+        websocket.send(JSON.stringify({ message: data.message }));
+      } catch (error) {
+        console.error('Error sending message to Discord bot:', error);
       }
-    });
+    }
   }
 });
 
