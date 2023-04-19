@@ -1,3 +1,3 @@
 {
-  "server_ip": "http://tabletop.mikecarmody.net"
+  "server_ip": "ip"
 }

@@ -1,23 +1,21 @@
 let config;
+let websocket;
 
 Hooks.on("init", async () => {
   config = await game.packs.get("foundry-discord-chat.config").getContent();
   const serverIp = config[0].data.server_ip;
+  websocket = new WebSocket(`${serverIp.replace('http', 'ws')}`);
+
+  websocket.onopen = () => {
+    console.log('Connected to WebSocket server');
+  };
 
   game.socket.on("module.foundry-discord-chat", async (data) => {
-    if (game.user.isGM) {
       try {
-        await fetch(`${serverIp}/foundry-message`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ message: data.message })
-        });
+        websocket.send(JSON.stringify({ message: data.message }));
       } catch (error) {
         console.error('Error sending message to Discord bot:', error);
       }
-    }
   });
 });
 
