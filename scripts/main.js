@@ -25,7 +25,7 @@ Hooks.on("init", async () => {
       } catch (error) {
         console.error('Error sending message to Discord bot:', error);
       }
-    }
+    })
   }
 });
 
