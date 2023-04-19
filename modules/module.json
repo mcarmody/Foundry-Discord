@@ -22,8 +22,5 @@
   "download": "https://github.com/mcarmody/Foundry-Discord/releases/latest/download/module.zip",
   "readme": "https://github.com/mcarmody/Foundry-Discord/blob/main/README.md",
   "changelog": "https://github.com/mcarmody/Foundry-Discord/blob/main/CHANGELOG.md",
-  "socket": true,
-  // "scripts": [
-  //   "scripts/main.js"
-  // ]
+  "socket": true
 }
