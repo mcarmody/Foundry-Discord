@@ -3,7 +3,7 @@ Hooks.once("init", async function () {
 
   // Add this line to start the API server
   require("./apiServer");
-}
+})
 
 Hooks.on("chatMessage", async (log, message, chatData) => {
   game.socket.emit("module.foundry-discord-chat", { message: chatData.content });
