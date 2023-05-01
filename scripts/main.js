@@ -1,3 +1,18 @@
+// const io = require("socket.io")(game.server);
+
+// io.on("connection", (socket) => {
+//   console.log("Socket.IO client connected:", socket.id);
+
+//   socket.on("module.foundry-discord-chat", (data) => {
+//     console.log("Received event in Foundry VTT module:", data);
+
+//     if (data.operation === "rollTest") {
+//       // Log the test in Foundry VTT or perform any other action
+//       console.log("Test rolled:", data.test);
+//     }
+//   });
+// });
+
 Hooks.once("init", async function () {
   console.log("Discord Chat | Initializing discord bot");
 
@@ -22,7 +37,9 @@ Hooks.once("ready", async function () {
         console.log("Character not found in Foundry VTT");
         callback(null);
       }
-    } else if (data.operation === "rollTest") {
+    }
+
+    if (data.operation === "rollTest") {
       // Log the test in Foundry VTT or perform any other action.
       console.log("Test rolled:", data.test);
     }
@@ -40,4 +57,16 @@ Hooks.once("ready", async function () {
     console.log("Emitting characters: "+characters);
     game.socket.emit("module.foundry-discord-chat", { operation: "characterList", characters: characters.map((c) => c.data) });
   }
-});
+
+  game.socket.on("module.foundry-discord-chat", async (data, callback) => {
+    console.log("Received request in Foundry VTT module:", data);
+
+    // Process the command based on the 'operation' value
+    if (data.operation === "rollTest") {
+      console.log("Command received from Discord bot:", data.message);
+      // Process the command here
+    } else {
+      console.log("Unknown operation:", data.operation);
+    }
+  });
+});;
