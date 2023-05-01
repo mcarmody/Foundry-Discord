@@ -28,4 +28,13 @@ Hooks.once("ready", async function () {
       }
     }
   });
+   // Replace 'folderName' with the name of the folder containing characters
+  const folderName = "Norsemen";
+  const folder = game.folders.find((f) => f.data.type === "Actor" && f.name === folderName);
+
+  if (folder) {
+    const characters = folder.content.filter((actor) => actor.data.type === "character");
+    console.log("Emitting characters: "+characters);
+    game.socket.emit("module.foundry-discord-chat", { operation: "characterList", characters: characters.map((c) => c.data) });
+  }
 });
