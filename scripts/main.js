@@ -58,15 +58,6 @@ Hooks.once("ready", async function () {
     game.socket.emit("module.foundry-discord-chat", { operation: "characterList", characters: characters.map((c) => c.data) });
   }
 
-  game.socket.on("module.foundry-discord-chat", async (data, callback) => {
-    console.log("Received request in Foundry VTT module:", data);
-
-    // Process the command based on the 'operation' value
-    if (data.operation === "rollTest") {
-      console.log("Command received from Discord bot:", data.message);
-      // Process the command here
-    } else {
-      console.log("Unknown operation:", data.operation);
-    }
-  });
+  game.socket.on("module.discord-test", (data) => {
+    console.log("Received test request from discord");
 });;
