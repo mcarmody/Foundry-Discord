@@ -60,4 +60,5 @@ Hooks.once("ready", async function () {
 
   game.socket.on("module.discord-test", (data) => {
     console.log("Received test request from discord");
-});;
+  });
+});
