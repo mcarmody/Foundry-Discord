@@ -22,28 +22,28 @@ Hooks.once("init", async function () {
 Hooks.once("ready", async function () {
   console.log("Ready!");
   // Set up a custom socket event for fetching character data
-  game.socket.on("module.foundry-discord-chat", async (data, callback) => {
-    console.log("Received request in Foundry VTT module:", data);
-    if (data.operation === "fetchCharacterData") {
-      const characterName = data.characterName;
+  // game.socket.on("module.foundry-discord-chat", async (data, callback) => {
+  //   console.log("Received request in Foundry VTT module:", data);
+  //   if (data.operation === "fetchCharacterData") {
+  //     const characterName = data.characterName;
 
-      // Search for the character in Foundry VTT using the Foundry API
-      const characters = game.actors.filter((actor) => actor.data.type === "character" && actor.name.toLowerCase() === characterName.toLowerCase());
+  //     // Search for the character in Foundry VTT using the Foundry API
+  //     const characters = game.actors.filter((actor) => actor.data.type === "character" && actor.name.toLowerCase() === characterName.toLowerCase());
 
-      if (characters.length > 0) {
-        console.log("Found character in Foundry VTT:", characters[0].data);
-        callback(characters[0].data);
-      } else {
-        console.log("Character not found in Foundry VTT");
-        callback(null);
-      }
-    }
+  //     if (characters.length > 0) {
+  //       console.log("Found character in Foundry VTT:", characters[0].data);
+  //       callback(characters[0].data);
+  //     } else {
+  //       console.log("Character not found in Foundry VTT");
+  //       callback(null);
+  //     }
+  //   }
 
-    if (data.operation === "rollTest") {
-      // Log the test in Foundry VTT or perform any other action.
-      console.log("Test rolled:", data.test);
-    }
-  });
+  //   if (data.operation === "rollTest") {
+  //     // Log the test in Foundry VTT or perform any other action.
+  //     console.log("Test rolled:", data.test);
+  //   }
+  // });
 
   // Emit a test message
   game.socket.emit("module.foundry-discord-chat", { operation: "testMessage", message: "Foundry VTT module is ready!" });
