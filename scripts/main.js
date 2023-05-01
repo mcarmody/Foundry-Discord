@@ -1,34 +1,17 @@
-const express = require('express');
-const { Server } = require('ws');
+// const io = require("socket.io")(game.server);
 
-// Create the Express app and WebSocket server
-const app = express();
-const server = require('http').createServer(app);
-const wss = new Server({ server });
+// io.on("connection", (socket) => {
+//   console.log("Socket.IO client connected:", socket.id);
 
-// Listen for WebSocket connections
-wss.on('connection', (ws) => {
-  console.log('Discord bot connected to WebSocket.');
+//   socket.on("module.foundry-discord-chat", (data) => {
+//     console.log("Received event in Foundry VTT module:", data);
 
-  // Listen for messages from the Discord bot
-  ws.on('message', (message) => {
-    const data = JSON.parse(message);
-    console.log('Received command from Discord bot:', data.command);
-
-    // Process the command here
-  });
-
-  // Handle WebSocket disconnections
-  ws.on('close', () => {
-    console.log('Discord bot disconnected from WebSocket.');
-  });
-});
-
-// Start the Express server and WebSocket on a specific port
-const port = 3000;
-server.listen(port, () => {
-  console.log(`WebSocket server listening on port ${port}`);
-});
+//     if (data.operation === "rollTest") {
+//       // Log the test in Foundry VTT or perform any other action
+//       console.log("Test rolled:", data.test);
+//     }
+//   });
+// });
 
 Hooks.once("init", async function () {
   console.log("Discord Chat | Initializing discord bot");
@@ -38,6 +21,29 @@ Hooks.once("init", async function () {
 
 Hooks.once("ready", async function () {
   console.log("Ready!");
+  // Set up a custom socket event for fetching character data
+  // game.socket.on("module.foundry-discord-chat", async (data, callback) => {
+  //   console.log("Received request in Foundry VTT module:", data);
+  //   if (data.operation === "fetchCharacterData") {
+  //     const characterName = data.characterName;
+
+  //     // Search for the character in Foundry VTT using the Foundry API
+  //     const characters = game.actors.filter((actor) => actor.data.type === "character" && actor.name.toLowerCase() === characterName.toLowerCase());
+
+  //     if (characters.length > 0) {
+  //       console.log("Found character in Foundry VTT:", characters[0].data);
+  //       callback(characters[0].data);
+  //     } else {
+  //       console.log("Character not found in Foundry VTT");
+  //       callback(null);
+  //     }
+  //   }
+
+  //   if (data.operation === "rollTest") {
+  //     // Log the test in Foundry VTT or perform any other action.
+  //     console.log("Test rolled:", data.test);
+  //   }
+  // });
 
   // Emit a test message
   game.socket.emit("module.foundry-discord-chat", { operation: "testMessage", message: "Foundry VTT module is ready!" });
